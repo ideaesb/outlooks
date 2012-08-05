@@ -1,0 +1,25 @@
+<html title="Outlooks List"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
+
+ <body>
+  <h1>Outlooks</h1>
+   <div align="center">
+       <form t:type="Form" t:id="searchForm">
+         <input t:type="TextField" t:id="searchText" size="30" value="searchText" />    
+         <t:submit t:id="search" value="Search" /><t:submit t:id="clear" value="Clear/Show All" />  
+  
+       </form>
+   </div>
+  
+  <div align="center">
+  <t:grid source="list" row="row" include="name,description,keywords,contact" >
+    <p:nameCell>${row.name}</p:nameCell>
+    <p:descriptionCell>${row.description}</p:descriptionCell>
+     <p:empty>
+       <p>There are no Outlooks (matching search criteria)</p>
+     </p:empty>
+  </t:grid>
+  </div>
+ </body>
+</html>

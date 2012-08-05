@@ -1,0 +1,546 @@
+@charset "UTF-8";
+/* CSS Document */
+
+body 
+{
+  margin:0;
+  border:0;         /* This removes the border around the viewport in old versions of IE */
+  min-width:600px; /* Minimum width of layout - remove line if not required */
+                   /* The min-width property does not work in old versions of Internet Explorer */
+  font-size:90%;
+  padding:10px;/*added by cameron*/
+  color:#303030;
+  background:#263f78 url(images/background.jpg);
+  /*background:#d1e8f7 url(images/bg.jpg) no-repeat top center; */
+  font-family: 'Rosario', sans-serif;
+}
+a 
+{
+  color:#369;
+}
+a:hover 
+{
+	text-decoration:none;
+}
+h1, h2, h3 
+{
+	margin:.8em 0 .2em 0;
+	padding:0;
+}
+p 
+{
+	margin:.5em 0 .8em 0;
+	padding:0;
+	font-size: 12px;
+
+}
+img 
+{
+	margin:10px 0 5px;
+}
+#ads img 
+{
+	display:block;
+	padding-top:10px;
+}
+/* Header styles */
+#header 
+{
+ clear:both;
+ width:800px;
+ height:100px;
+
+}
+
+#header img
+{
+	margin:0;
+	padding:0;
+
+}
+#header 
+{
+  /* border-bottom:1px solid #000; */
+}
+#header p,
+#header h1,
+#header h2 
+{
+	padding:.4em 15px 0 15px;
+	margin:0;
+}
+#header ul 
+{
+	clear:left;
+	float:left;
+	width:100%;
+	list-style:none;
+	margin:10px 0 0 0;
+	padding:0;
+}
+#header ul li 
+{
+	display:inline;
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+#header ul li a 
+{
+	display:block;
+	float:left;
+	margin:0 0 0 1px;
+	padding:3px 10px;
+	text-align:center;
+	background:#eee;
+	color:#000;
+	text-decoration:none;
+	position:relative;
+	left:15px;
+	line-height:1.3em;
+}
+#header ul li a:hover {
+	background:#369;
+	color:#fff;
+}
+#header ul li a.active,
+#header ul li a.active:hover 
+{
+	color:#fff;
+	background:#000;
+	font-weight:bold;
+}
+#header ul li a span {
+	display:block;
+}
+/* 'widths' sub menu */
+#layoutdims {
+	clear:both;
+	background:#eee;
+	border-top:4px solid #000;
+	margin:0;
+	padding:6px 15px !important;
+	text-align:right;
+}
+/* column container */
+
+/* Footer styles */
+
+
+
+#footer {
+	clear:both;
+	padding-top:5px;
+	height:75px;
+	width:800px; /* added by cameron. matches the container width */
+	/*border-top:1px solid #000;*/
+	background-color:#fff;
+
+}
+
+#bottom {
+	clear:both;
+	width:800px; /* added by cameron. matches the container width */
+	height:4px;
+	background-color:#ccc;
+	border-top: 1px solid #bbb;
+}
+
+#top-footer {
+	clear:both;
+	width:800px; /* added by cameron. matches the container width */
+	height:4px;
+	background-color:#ccc;
+	border-top: 1px solid #bbb;
+}
+
+
+#nav {
+		float: left;
+		width: 100%; 
+		margin: 32px 0px 0px;
+		padding: 0;
+		list-style: none;
+		background: #ccc;
+		border-bottom: 1px solid #999;
+		border-top: 1px solid #999;
+		}
+	
+	#nav li { 
+		float: left;
+		margin: 0;
+		padding: 0;
+		}
+	
+	#nav a {
+		float: left;
+		display: block;
+		padding: 6px 23px 6px 5px;
+		text-decoration: none;
+		font-size: 12px;
+		text-transform:uppercase;
+		color: #666;
+		background: #ccc url(images/nav_slant.gif) no-repeat top right;
+		letter-spacing:0;
+		}
+	
+	#nav #nav-1 a {
+		color: #333333;
+		margin-left:10px;
+		letter-spacing:0;
+		}
+		
+		#nav #nav-r a {
+		margin-left:500px;
+		padding: 0px 0px 0px 0px;
+		}
+		#nav #nav-r img {
+		padding: 0px 0px 0px 0px;
+		}
+		#nav #nav-x a {
+		margin-left:5px;
+		padding: 0px 0px 0px 0px;
+		}
+		#nav #nav-x img {
+		padding: 0px 0px 0px 0px;
+		}
+	
+	#nav a:hover {
+		color: #333333;
+		text-decoration:underline;
+		letter-spacing:0;
+		}
+		
+		
+	
+	
+	/** LEFT NAVIGATION **/
+	#leftNav { 
+		width: 158px; 
+		padding-top:15px;
+
+		/*float: left; */
+	} 
+	#leftNavElements  {
+		margin-top: 0px;
+		list-style-type: none;
+		margin-left: 0px;  
+		margin-bottom: 5px;
+		padding-left: 0px;
+		width: 100%;
+	}
+	#leftNavElements a { color: #3f3f3f;text-decoration:none; }
+
+
+	/* GENERAL NODE STYLES */
+	#leftNavElements li {
+		background: url('images/left_nav_bullet.png') no-repeat top left;
+		background-color: #d1e8f7;
+		font-size: 11px;
+		text-transform:uppercase;
+		line-height: 1.4em;
+		border-top:  1px dotted #ffffff;
+		padding: 3px 4px 4px 18px; 
+		margin-left: 0px;
+	}
+
+	#leftNavElements li:hover {
+
+		background-color: #ccc;
+
+	}
+	#leftNavExtras { 
+		padding: 4px;
+		text-align:center;
+	}
+
+	/* NODE-SPECIFIC STYLES */
+	li#leftNavTopItem {
+		background-color:  #0057A5; 
+	}
+	li#leftNavAlerts {
+		background-color: #0765a2;
+	}
+
+	li#leftNavAlerts a:link {
+		color: #ffffff;
+	}
+	#leftNavExtras img { 
+		margin: 4px;
+		border: 0px;
+	}
+	
+	/* LEFT NAV USER EXTRAS */
+	#leftNavUserExtras ul {
+		list-style-type: none;
+		margin-left: 0px;  
+		margin-bottom: 4px;
+		margin-top: 20px;
+		padding-left: 0px;
+		width: 100%;
+	}
+	#leftNavUserExtras ul li {
+		background: url('images/left_nav_extras_bullet.png') no-repeat top left;
+		background-color: #ffffff;
+		color: #666666; 
+		font-weight: normal;
+		font-size: .7em;
+		line-height: 1.4em;
+		border-top: 1px dotted #AEDBF4;
+		padding: 1px 4px 4px 18px; 
+		margin-left: 0px;
+	}
+	#leftNavUserExtras li.heading { 
+		padding-left: 6px;
+		background-image: none;
+		background-color: #f0f8fe;
+		color: #0057A5;
+		font-weight: bold;
+	} 
+	#leftNavUserExtras * { font-weight: normal; }
+	#leftNavUserExtras a:link { color: #0057A5; }
+
+	
+	
+	
+	
+	
+
+/*added by cameron for the look and physical layout of the website*/
+#mainContainer{
+	width:800px;
+	height:820px;
+	border:1px solid #bbb;
+	 background-color:#f4f4f4;
+	margin: 0 auto; /* the auto margins (in conjunction with a width) center the page */
+	line-height:16px;
+}
+
+#map {
+	border:1px solid #8eb8cf;
+
+}
+
+
+#midde-column {
+	width:350px;
+	height:570px;
+	margin: 0; /* the auto margins (in conjunction with a width) center the page */
+	font-size: 14px;
+	line-height:18px;
+	padding-top:6px;
+	float:left;
+
+	margin-bottom:20px;
+
+
+} 
+
+#middle-column #outermap {  
+	margin:10px 0;
+	padding:10px 0;
+	border-top:solid 1px #ccc;
+	border-bottom:solid 1px #ccc;
+}
+
+#leftColumn { 
+	width: 160px; 
+	height:520px;
+	float: left; 
+	padding-right:20px;
+	}
+
+#right-column { 
+	width: 225px; 
+	height:520px;
+	float: left; 
+	padding-left:25px;
+	padding-top:12px;
+	}
+
+
+#pikoDefinition{
+	float:left;
+	width:128px;
+	background-color: #CCC;
+	padding:10px 10px 10px 20px;
+	margin-top:0;
+}
+
+#canyon {
+	margin:10px 0 0 0;
+	padding:0;
+}
+
+.center {
+	text-align:center;
+}
+
+
+
+
+#bodyContainer { 
+	width: 750px; 
+	height: 535px;
+	margin: 10px auto; /* the auto margins (in conjunction with a width) center the page */
+}
+ 
+#container3 {
+	width: 750px;
+	height: 500px; /*27*/
+	margin: 0 auto; /* the auto margins (in conjunction with a width) center the page */
+	text-align: left; /* this overrides the text-align: center on the body element. */
+	padding-top: 10px;
+	float:left;
+	margin-bottom:20px;
+} 
+#container2 {
+	width: 750px;
+	height: 500px; /*25*/
+	margin: 0 auto; /* the auto margins (in conjunction with a width) center the page */
+	text-align: left; /* this overrides the text-align: center on the body element. */
+	overflow:scroll; /*this is the code to make the container scrollable */	
+	border:1px solid black;
+	float:left;
+
+} 
+#searchContainer{
+	width:750px;
+	margin: 10px auto; /* the auto margins (in conjunction with a width) center the page */
+	/*border:1px solid black;*/
+	float:left;
+	padding-bottom:10px;
+}
+
+
+
+/*for programs page only*/
+#programContainer {
+	width: 725px;
+	height: 650px; /*27*/
+	margin: 0 auto; /* the auto margins (in conjunction with a width) center the page */
+/*	overflow:scroll;   ---  this is the code to make the container scrollable */	
+	overflow-y: scroll;
+    overflow-x: hidden;
+} 
+
+#browse-box {font-size:12px;width:400px;text-align:left;}  /*border:1px solid black   removed by cameron 7/5 */
+.title-blue{background:#66CCFF; font-weight:bold;text-align:center;border:1px solid black;font-size:12px;white-space:nowrap;
+}
+.project-box {border:1px solid black;font-size:12px;width:720px;text-align:left}
+.first-blue{background:#6699CC; font-weight:bold;}
+#project-box td {vertical-align:middle;}
+/* SpryAccordion.css - version 0.4 - Spry Pre-Release 1.6.1 */
+
+/* Copyright (c) 2006. Adobe Systems Incorporated. All rights reserved. */
+
+/* This is the selector for the main Accordion container. For our default style,
+ * we draw borders on the left, right, and bottom. The top border of the Accordion
+ * will be rendered by the first AccordionPanelTab which never moves.
+ *
+ * If you want to constrain the width of the Accordion widget, set a width on
+ * the Accordion container. By default, our accordion expands horizontally to fill
+ * up available space.
+ *
+ * The name of the class ("Accordion") used in this selector is not necessary
+ * to make the widget function. You can use any class name you want to style the
+ * Accordion container.
+ */
+.Accordion {
+	border-left: solid 1px gray;
+	border-right: solid 1px black;
+	border-bottom: solid 1px gray;
+	overflow: hidden;
+}
+
+/* This is the selector for the AccordionPanel container which houses the
+ * panel tab and a panel content area. It doesn't render visually, but we
+ * make sure that it has zero margin and padding.
+ *
+ * The name of the class ("AccordionPanel") used in this selector is not necessary
+ * to make the widget function. You can use any class name you want to style an
+ * accordion panel container.
+*/
+.AccordionPanel {
+	margin: 0px;
+	padding: 0px;
+}
+
+/* This is the selector for the AccordionPanelTab. This container houses
+ * the title for the panel. This is also the container that the user clicks
+ * on to open a specific panel.
+ *
+ * The name of the class ("AccordionPanelTab") used in this selector is not necessary
+ * to make the widget function. You can use any class name you want to style an
+ * accordion panel tab container.
+ *
+ * NOTE:
+ * This rule uses -moz-user-select and -khtml-user-select properties to prevent the
+ * user from selecting the text in the AccordionPanelTab. These are proprietary browser
+ * properties that only work in Mozilla based browsers (like FireFox) and KHTML based
+ * browsers (like Safari), so they will not pass W3C validation. If you want your documents to
+ * validate, and don't care if the user can select the text within an AccordionPanelTab,
+ * you can safely remove those properties without affecting the functionality of the widget.
+ */
+.AccordionPanelTab {
+	background-color: #CCCCCC;
+	border-top: solid 1px black;
+	border-bottom: solid 1px gray;
+	margin: 0px;
+	padding: 2px;
+	cursor: pointer;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+}
+
+/* This is the selector for a Panel's Content area. It's important to note that
+ * you should never put any padding on the panel's content area if you plan to
+ * use the Accordions panel animations. Placing a non-zero padding on the content
+ * area can cause the accordion to abruptly grow in height while the panels animate.
+ *
+ * Anyone who styles an Accordion *MUST* specify a height on the Accordion Panel
+ * Content container.
+ *
+ * The name of the class ("AccordionPanelContent") used in this selector is not necessary
+ * to make the widget function. You can use any class name you want to style an
+ * accordion panel content container.
+ */
+.AccordionPanelContent {
+	overflow: auto;
+	margin: 0px;
+	padding: 0px;
+}
+
+/* This is an example of how to change the appearance of the panel tab that is
+ * currently open. The class "AccordionPanelOpen" is programatically added and removed
+ * from panels as the user clicks on the tabs within the Accordion.
+ */
+.AccordionPanelOpen .AccordionPanelTab {
+	background-color: #EEEEEE;
+}
+
+/* This is an example of how to change the appearance of the panel tab as the
+ * mouse hovers over it. The class "AccordionPanelTabHover" is programatically added
+ * and removed from panel tab containers as the mouse enters and exits the tab container.
+ */
+.AccordionPanelTabHover {
+	color: #999;
+}
+.AccordionPanelOpen .AccordionPanelTabHover {
+	color: #999;
+}
+
+/* This is an example of how to change the appearance of all the panel tabs when the
+ * Accordion has focus. The "AccordionFocused" class is programatically added and removed
+ * whenever the Accordion gains or loses keyboard focus.
+ */
+.AccordionFocused .AccordionPanelTab {
+	background-color: #CCC;
+}
+
+/* This is an example of how to change the appearance of the panel tab that is
+ * currently open when the Accordion has focus.
+ */
+.AccordionFocused .AccordionPanelOpen .AccordionPanelTab {
+	background-color: #FFF;
+}

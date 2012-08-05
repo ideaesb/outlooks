@@ -1,0 +1,158 @@
+<html t:type="layout" title="outlooks"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
+ 
+<body>
+    <ul id="nav">
+     <li id="nav-1"><a href="http://www.pacificcis.org"><span>HOME </span></a></li>
+     <li id="nav-1"><a href="javascript:alert('Under Construction');"><span>Scenarios</span></a></li>
+     <li id="nav-1"><t:pagelink page="prop:componentResources.pageName">Outlooks</t:pagelink></li>
+     <li id="nav-1"><a href="javascript:alert('Under Construction');"><span>Climatology</span></a></li>
+
+    <!-- 
+    <li id="nav-r"><a href="javascript:alert('Word!');" title="Word"><img src="${context:layout/images/Word.jpg}" alt="Word" title="Word" /></a></li>
+    <li id="nav-x"><a href="javascript:alert('PDF!');" title="PDF"><img src="${context:layout/images/pdf_button.png}" alt="PDF" title="PDF" /></a></li>
+    <li id="nav-x"><a href="javascript:alert('Excel!');" title="Excel"><img src="${context:layout/images/Excel.jpg}" alt="Excel" title="Excel" /></a></li>
+    <li id="nav-x"><a href="javascript:alert('Email!');" title="Email"><img src="${context:layout/images/emailButton.png}" alt="Email" title="Email" /></a></li>
+    <li id="nav-x"><a href="javascript:alert('Print!');" title="Print"><img src="${context:layout/images/printButton.png}" alt="Print" title="Print" /></a></li>
+    -->
+     
+    </ul>
+    
+
+    <div id = "bodyContainer"> <!-- this keeps the meat and potatoes beneath navigation and before footer contained together -->
+		<div id ="searchContainer"><!-- this keeps the filter and the additional search features contained together -->
+		
+		 <form t:type="form" t:id="searchCriteria" action="outlooks" method="post">
+		   <table width="750">
+		   <tr>
+		      <td width="245">
+		        <t:label for="regions"/>:<br />
+		        <t:select t:id="regions" blankOption="ALWAYS" t:blankLabel="All"    
+		                  onchange="this.form.submit()" width="245" style="width:245px;font-size:11px;overflow: auto;" />
+		      </td>
+		      <td width="245">
+		        <t:label for="ecv"/>:<br />
+		        <t:select t:id="ecv" blankOption="ALWAYS" t:blankLabel="All"    
+		                  onchange="this.form.submit()" width="245" style="width:245px;font-size:11px;overflow: auto;" />
+		      </td>
+		      <td width="245">
+		        <t:label for="phenomena"/>:<br />
+		        <t:select t:id="phenomena" blankOption="ALWAYS" t:blankLabel="All"    
+		                  onchange="this.form.submit()" width="245" style="width:245px;font-size:11px;overflow: auto;" />
+		      </td>
+	      </tr>
+		   <tr>
+		      <td width="245">
+		        By Sector:<br />
+		        <select id="regions" name="regions" width="245" onchange="javascript:browseBy();" style="width:245px;font-size:11px;overflow: auto;">
+		          <option value="0" >All</option>
+		          <option value="1" >Public Health and Safety</option>
+		          <option value="2" >Fresh Water Resources</option>
+		          <option value="3" >Energy</option>
+		          <option value="4" >Transportation/Communication and Commerce</option>
+		          <option value="5" >Community Planning and Development</option>
+		          <option value="6" >Social and Cultural Resources</option>
+		          <option value="7" >Agriculture and Fisheries</option>
+		          <option value="8" >Recreation and Tourism</option>
+		          <option value="9" >Ecosystems</option>
+		          <option value="10" >Other</option>
+                </select>
+		      </td>
+		   <td width="245">
+		      By Methodology:<br />
+		       <select id="ecv" name="ecv" width="245" onchange="javascript:browseBy();" style="width:245px;font-size:11px;overflow: auto;">
+		        <option value="0" >All</option>
+		        <option value="1" >In-Situ Observations</option>
+		        <option value="2" >Satellite/Remote Observations</option>
+		        <option value="3" >Statistical Model</option>
+		        <option value="4" >Dynamical Model</option>
+		       </select>
+		   </td>
+		   <td width="245">
+		      By Spatial/Time Scale:<br />
+		       <select id="dps" name="dps"  width="245" onchange="javascript:browseBy();"  style="width:245px;font-size:11px;overflow: auto;">
+		        <option value="0" >All</option>
+		        <option value="1" >Region/Nation (Grid)</option>
+		        <option value="2" >Location/Site Specific (Point)</option>
+		        <option value="3" >Past (Historical, Climatology)</option>
+		        <option value="4" >Future - All</option>
+		        <option value="5" >Future - One Month</option>
+		        <option value="6" >Future - Three Months</option>
+		        <option value="7" >Future - Six Months or more</option>
+		       </select>
+		      </td>
+		      </tr>
+		    </table>
+		   </form>  
+		
+		    <table width="750" style="border-collapse: collapse; border-spacing: 0;">
+		     <tr class="title-blue" border="1">
+		        <td  align="right" width="150">Text Search</td>
+		        <td align="left">
+		          <form t:type="form" t:id="txtSearchForm">
+                   <input t:type="TextField" t:id="searchText" size="50" value="searchText" />
+                   <t:submit t:id="search" value="Go" /><t:submit t:id="clear" value="Clear/Show All" />
+                  </form>    
+                 </td>
+		      </tr>
+		    </table>
+
+		</div><!-- End of "searchContainer" -->
+    
+
+
+ <div id="container3"><!-- Contains the accordion. Allows for padding on the top of the accordion to fit and look better on page-->
+  <div id="container2"><!-- This contains the scroll css code. -->
+   <div id="Accordion1" class="Accordion" tabindex="0">
+
+
+   
+     <div class="AccordionPanel" t:type="Loop" t:source="list" t:value="row">
+      <div class="AccordionPanelTab">
+
+       <table class="project-box">
+        <colgroup>
+          <col class="title-blue" />
+        </colgroup>
+        <tr>
+         <td width="67" style="width: 67px">Name</td>
+         <td>${row.name}</td>
+        </tr>
+       </table>
+
+    </div><!-- End Accordion Panel Tab -->
+
+
+    <div class="AccordionPanelContent"><!--added by cameron-->
+
+    <table class="project-box">
+     <colgroup>
+      <col class="title-blue" />
+     </colgroup>
+     <tr>
+      <td>Description</td>
+      <td>${row.description}(<a href="#" target="_blank">More</a>)</td>
+     </tr>
+    </table>
+
+        <!-- Column 1 end -->
+    </div><!-- End of AccordionPanelContent -->
+   </div><!-- End of AccordionPanel (both content and tab)  -->
+
+
+   </div><!-- End of Accordion 1 -->
+  </div><!-- End of "container 2" -->
+ </div><!-- End of "container 3" -->
+
+  
+    
+    
+    </div><!--end of bodyContainer-->
+    
+<script type="text/javascript"><!--added by cameron-->
+var Accordion1 = new Spry.Widget.Accordion("Accordion1",{useFixedPanelHeights: false, defaultPanel: -1 });
+</script><!--(works only if loaded at end) -->
+
+</body>
+</html>

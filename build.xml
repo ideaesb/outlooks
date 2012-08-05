@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project>
+<project name="outlooks" default="ftpstore">
+	
+  <property file="build.properties" />
+	
+	<!-- Configure properties to access the Manager application -->
+	  <property name="url"      value="${manager.url}"/>
+	  <property name="username" value="${manager.uid}"/>
+	  <property name="password" value="${manager.pwd}"/>
+
+	  <!-- Configure the custom Ant tasks for the Manager application -->
+	  <taskdef name="deploy"    classname="org.apache.catalina.ant.DeployTask"/>
+	  <taskdef name="list"      classname="org.apache.catalina.ant.ListTask"/>
+	  <taskdef name="reload"    classname="org.apache.catalina.ant.ReloadTask"/>
+	  <taskdef name="resources" classname="org.apache.catalina.ant.ResourcesTask"/>
+	  <taskdef name="roles"     classname="org.apache.catalina.ant.RolesTask"/>
+	  <taskdef name="start"     classname="org.apache.catalina.ant.StartTask"/>
+	  <taskdef name="stop"      classname="org.apache.catalina.ant.StopTask"/>
+	  <taskdef name="undeploy"  classname="org.apache.catalina.ant.UndeployTask"/>
+
+  <target name="clean" depends="warfile">
+	  	
+  	<echo message="creating target/${context.name}.zip...(overwriting, if exists)" />
+     <zip destfile="target/${context.name}.zip" basedir="." excludes="target/**, lucene/**" />
+  	
+
+  	 <echo message="creating ${db.txt}..(overwriting, if exists)" />
+     <exec executable="cmd.exe" output="target/${db.txt}">
+      <arg line="/c ${pg_dump} ${pgconnect} --format plain --encoding UTF8 ${context.name}" />
+     </exec>
+   </target>
+	
+	<target name="warfile">
+	  	<echo message="creating ${context.name}.war using mvn package" />
+	     <exec executable="cmd.exe">
+	      <arg line="/c mvn package" />
+	     </exec>
+	</target>
+
+   <target name="refresh">
+  	<echo message="cleaning up eclipse" />
+     <exec executable="cmd.exe">
+      <arg line="/c mvn eclipse:clean" />
+     </exec>
+  	<echo message="update libraries" />
+     <exec executable="cmd.exe">
+      <arg line="/c mvn eclipse:eclipse -DdownloadSources=true" />
+     </exec>
+ 
+   </target>
+
+	
+	
+  <target name="ftpstore" depends="clean">
+
+  	<echo message="Store source minus target and war on FTP site...BINARY MODE" />
+  	<ftp password="${idea.ftp.pwd}" server="${idea.ftp.url}" userid="${idea.ftp.usr}">
+ 	 <fileset dir="target">
+ 	  <include name="${context.name}.zip"/>
+	  <include name="${war.name}"/>
+ 	 </fileset>
+    </ftp>
+
+  	<echo message="Store ${context.name} DB instance...ASCII MODE" />
+  	<ftp password="${idea.ftp.pwd}" server="${idea.ftp.url}" binary="no" userid="${idea.ftp.usr}">
+  		<fileset dir="target">
+  		 <include name="${context.name}.db.txt"/>
+  	    </fileset>
+  	</ftp>
+  	
+  </target>
+	
+
+	  <target name="stoptomcat">
+	  	<echo message="Stopping tomcat" />
+	    <exec executable="cmd.exe">
+	     <arg line="/c ${tomcat.home}/bin/shutdown.bat" />
+	    </exec>
+	  </target>
+		
+	  <target name="starttomcat">
+	 	<echo message="Starting tomcat" />
+	    <exec executable="cmd.exe">
+	     <arg line="/c ${tomcat.home}/bin/startup.bat" />
+	    </exec>
+	  </target>
+	
+	  <target name="deploy" description="Install ${context.name} web application" depends="clean">
+	  <antcall target="deploy-fresh"></antcall>
+	  </target>
+	  
+	 <target name="deploy-fresh" description="Install ${context.name} web application">
+	  	<deploy url="${url}" username="${username}" password="${password}"
+		        path="/${context.name}" war="target/${war.name}" update="true" />
+	  </target>
+	
+	  <target name="undeploy" description="Remove web application">
+	   <undeploy url="${url}" username="${username}" password="${password}"  path="/${context.name}" />
+	  </target>
+	  <target name="forceundeploy" description="Remove web application">
+	  	<echo message="Removing all traces of ${context.name}, logs from ${tomcat.home}" />
+	  	<delete dir="${webapps.dir}/${context.name}" />
+	  	<delete file="${webapps.dir}/${context.name}.war" />
+	  	<delete dir="${tomcat.home}/work/Catalina/localhost/${context.name}" />
+	  	<delete file="${tomcat.home}/conf/Catalina/localhost/${context.name}.xml" />
+	  	<delete dir="${tomcat.home}/logs" />
+	  	<mkdir  dir="${tomcat.home}/logs" />
+	  </target>	
+
+</project>
