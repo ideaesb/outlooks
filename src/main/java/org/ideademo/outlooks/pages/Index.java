@@ -6,18 +6,14 @@ import java.util.Vector;
 
 import org.apache.tapestry5.PersistenceConstants;
 
-import org.apache.tapestry5.annotations.InjectComponent;
-import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.Persist;
 
-import org.apache.tapestry5.corelib.components.Zone;
 
 import org.apache.tapestry5.hibernate.HibernateSessionManager;
 
 import org.apache.tapestry5.ioc.annotations.Inject;
 
-import org.apache.tapestry5.services.Request;
 
 import org.hibernate.Session;
 
@@ -45,8 +41,8 @@ public class Index
   private Outlook example;
   
   
-  //////////////////////////////
-  // Used in rendering Grid Row
+  //////////////////////////////////////////////////////////////
+  // Used in rendering within Loop just as in Grid (Table) Row
   @SuppressWarnings("unused")
   @Property 
   private Outlook row;
@@ -62,24 +58,14 @@ public class Index
   @Inject
   private HibernateSessionManager sessionManager;
 
-  /*
-  @InjectComponent
-  private Zone editZone;
-
-  @Inject
-  private Request request;	
- 
-  @InjectPage
-  private Index index;
-  */
+  
   ///////////////////////////////////////////////////////////////////////////////////////////////////////
   //  Select Boxes - Enumaration values - the user-visible labels are externalized in Index.properties 
-  //
   
   
   // the regions select box
   @Property
-  @Persist
+  @Persist (PersistenceConstants.FLASH)
   private Regions regions;
   
   public enum Regions
@@ -90,7 +76,7 @@ public class Index
   
   // the ECV select box
   @Property
-  @Persist
+  @Persist (PersistenceConstants.FLASH)
   private Ecv ecv;
   
   public enum Ecv
@@ -101,13 +87,45 @@ public class Index
   
   // the ECV select box
   @Property
-  @Persist
+  @Persist (PersistenceConstants.FLASH)
   private Phenomena phenomena;
   
   public enum Phenomena
   {
 	  DROUGHT, RAIN, FLOOD, BLEACH, OTHERP
   }
+  
+  // the sector select box
+  @Property
+  @Persist (PersistenceConstants.FLASH)
+  private Sector sector;
+  
+  public enum Sector
+  {
+	  PHS, FWR, ENE, TCC, CPD, SCR, AAF, RAT, ECO, OTS
+  }
+  
+  // the METHOLOGY select box
+  @Property
+  @Persist (PersistenceConstants.FLASH)
+  private Method methodology;
+  
+  public enum Method
+  {
+	 INSITU, REMOTE, STATIC, DYNAMIC  
+  }
+
+  // the TIMESCALE select box
+  @Property
+  @Persist (PersistenceConstants.FLASH)
+  private Timescale timescale;
+  
+  public enum Timescale
+  {
+	 PAST, CURRENT, FUTURE  
+  }
+
+  
   
   
   ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -123,6 +141,9 @@ public class Index
 	if (regions != null) onValueChangedFromRegions(regions.toString());
 	if (ecv != null)  onValueChangedFromEcv(ecv.toString());
 	if (phenomena != null) onValueChangedFromPhenomena(phenomena.toString());
+	if (sector != null) onValueChangedFromSector(sector.toString());
+	if (methodology != null) onValueChangedFromMethodology(methodology.toString());
+	if (timescale != null) onValueChangedFromTimescale(timescale.toString());
 	
 	// then makes lists and sublists as per the search criteria 
 	List<Outlook> xlst=null;
@@ -243,6 +264,8 @@ public class Index
     regions=null;
     ecv=null;
     phenomena=null;
+    methodology=null;
+    timescale=null;
     
     this.example = null;
     return null; 
@@ -343,7 +366,7 @@ public class Index
       return null;
   }
   
-  // ECV select box listener
+  // ECV Phenomena box listener
   Object onValueChangedFromPhenomena(String choice)
   {	
 	  // if there is no example
@@ -394,7 +417,168 @@ public class Index
       return null;
   }
   
+ 
+  
+  Object onValueChangedFromSector(String choice)
+  {	
+	  // if there is no example
+	  
+	  if (this.example == null) 
+	  {
+		  logger.info("Sector Select Value Changed, Example is NULL");
+		  this.example = new Outlook(); 
+	  }
+	  else
+	  {
+		  logger.info("Sector Select Value Changed, Example is NOT null");
+	  }
+	  logger.info("Sector Chosen = " + choice);
+	  
+	  clearSector(example);
+      if (choice == null)
+	  {
+    	// clear 
+	  }
+      else if (choice.equalsIgnoreCase("PHS"))
+      {
+    	example.setHealth(true);
+      }
+      else if (choice.equalsIgnoreCase("FWR"))
+      {
+    	example.setFreshWater(true);
+      }
+      else if (choice.equalsIgnoreCase("ENE"))
+      {
+    	example.setEnergy(true);  
+      }
+      else if (choice.equalsIgnoreCase("TCC"))
+      {
+    	example.setTransportation(true);  
+      }
+      else if (choice.equalsIgnoreCase("CPD"))
+      {
+    	example.setPlanning(true);  
+      }
+      else if (choice.equalsIgnoreCase("SCR"))
+      {
+    	example.setSocioCultural(true);  
+      }
+      else if (choice.equalsIgnoreCase("AAF"))   
+      {
+    	example.setAgriculture(true);  
+      }
+      else if (choice.equalsIgnoreCase("RAT"))
+      {
+    	example.setRecreation(true);  
+      }
+      else if (choice.equalsIgnoreCase("ECO"))
+      {
+    	example.setEcological(true);  
+      }
+      else if (choice.equalsIgnoreCase("OTS"))
+      {
+    	example.setOtherSector(true);  
+      }
+      else
+      {
+    	 // do nothing
+      }
+      
+	  // return request.isXHR() ? editZone.getBody() : null;
+      // return index;
+      return null;
+  }
+  
+  Object onValueChangedFromMethodology(String choice)
+  {	
+	  // if there is no example
+	  
+	  if (this.example == null) 
+	  {
+		  logger.info("METHODOLOGY search criteria was changed -  Example is NULL");
+		  this.example = new Outlook(); 
+	  }
+	  else
+	  {
+		  logger.info("METHODOLOGY search criteria was changed -  Example is NOT null");
+	  }
+	  logger.info("Looking for Methodology = " + choice);
+	  
+	  clearMethodologies(example);
+      if (choice == null)
+	  {
+    	// clear 
+	  }
+      else if (choice.equalsIgnoreCase("INSITU"))
+      {
+    	example.setInsitu(true);
+      }
+      else if (choice.equalsIgnoreCase("REMOTE"))
+      {
+    	example.setRemote(true);
+      }
+      else if (choice.equalsIgnoreCase("STATIC"))
+      {
+    	example.setStatistical(true);  
+      }
+      else if (choice.equalsIgnoreCase("DYNAMIC"))
+      {
+    	example.setDynamical(true);  
+      }
+      else
+      {
+    	 // do nothing
+      }
+      
+	  // return request.isXHR() ? editZone.getBody() : null;
+      // return index;
+      return null;
+  }
 
+  Object onValueChangedFromTimescale(String choice)
+  {	
+	  // if there is no example
+	  
+	  if (this.example == null) 
+	  {
+		  logger.info("Picked Timescale Criteria - Example is NULL");
+		  this.example = new Outlook(); 
+	  }
+	  else
+	  {
+		  logger.info("Picked a timescale search criteria - Example is NOT null");
+	  }
+	  logger.info("Timescale search criteria  = " + choice);
+	  
+	  clearTimescales(example);
+      if (choice == null)
+	  {
+    	// clear 
+	  }
+      else if (choice.equalsIgnoreCase("PAST"))
+      {
+    	example.setPast(true);
+      }
+      else if (choice.equalsIgnoreCase("CURRENT"))
+      {
+    	example.setCurrent(true);
+      }
+      else if (choice.equalsIgnoreCase("FUTURE"))
+      {
+    	example.setFuture(true);  
+      }
+      else
+      {
+    	 // do nothing
+      }
+      
+	  // return request.isXHR() ? editZone.getBody() : null;
+      // return index;
+      return null;
+  }
+  
+  
+  
   ////////////////////////////////////////////////
   //  QBE Setter 
   //  
@@ -433,5 +617,33 @@ public class Index
 	outlook.setBleaching(false);
 	outlook.setOtherPhenomena(false);
   }
+  
+  private void clearSector(Outlook outlook)
+  {
+	outlook.setHealth(false);
+	outlook.setFreshWater(false);
+	outlook.setEnergy(false);
+	outlook.setTransportation(false);
+	outlook.setPlanning(false);
+	outlook.setSocioCultural(false);
+	outlook.setAgriculture(false);
+	outlook.setRecreation(false);
+	outlook.setEcological(false);
+	outlook.setOtherSector(false);
+  }
 
+  private void clearMethodologies(Outlook outlook)
+  {
+	outlook.setInsitu(false);
+	outlook.setRemote(false);
+	outlook.setStatistical(false);
+	outlook.setDynamical(false);
+  }
+  
+  private void clearTimescales(Outlook outlook)
+  {
+	 outlook.setPast(false);
+	 outlook.setCurrent(false);
+	 outlook.setFuture(false);
+  }
 }

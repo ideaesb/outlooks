@@ -1,0 +1,198 @@
+<html t:type="longform" title="Create Assessment"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
+      
+<body>
+   <t:form t:id="outlook" class="appnitro">
+   
+   <div class="form_description">
+     <h2>Pacific Region RCSD Outlook (<font color="red">Read Only</font>)</h2>
+     <p>Use this form to add or update an Outlook record into Piko (Worsheet July 2012)</p>
+   </div>		
+   
+   <t:errors/>
+
+   <ul>
+   
+        <li id="li_code">
+         <t:label class="description" for="code" />
+         <t:textField t:id="code" t:validate="maxlength=255" size="15" value="entity.code" />
+        </li>
+		<li id="li_name">
+		<t:label class="description" for="name" />
+		<t:textArea t:id="name" t:validate="maxlength=1024" rows="1" cols="90" value="entity.name" />
+		</li>
+
+     <li>     
+     <fieldset>
+
+      <legend class="description" onclick="javascript:hideToggle('regionBox');" title="Show or Hide">Region/Locale</legend>
+       <div id="regionBox" class="unhidden">
+	
+
+		<t:checkbox t:id="centralNorthPacific" t:value="entity.centralNorthPacific"  class="element checkbox" /><t:label for="centralNorthPacific" class="choice" />
+		<t:checkbox t:id="stateOfHawaii" t:value="entity.stateOfHawaii"  class="element checkbox indent" /><t:label for="stateOfHawaii" class="indent" />
+		<t:checkbox t:id="northWestHawaiianIslands" t:value="entity.northWestHawaiianIslands"  class="element checkbox indent" /><t:label for="northWestHawaiianIslands" class="indent" />
+		<t:checkbox t:id="pacificRemoteIslands" t:value="entity.pacificRemoteIslands"  class="element checkbox indent" /><t:label for="pacificRemoteIslands" class="indent" />
+		<t:checkbox t:id="westernNorthPacific" t:value="entity.westernNorthPacific"  class="element checkbox" /><t:label for="westernNorthPacific" class="choice" />
+		<t:checkbox t:id="cnmi" t:value="entity.cnmi"  class="element checkbox indent" /><t:label for="cnmi" class="indent" />
+		<t:checkbox t:id="fsm" t:value="entity.fsm"  class="element checkbox indent" /><t:label for="fsm" class="indent" />
+		<t:checkbox t:id="guam" t:value="entity.guam"  class="element checkbox indent" /><t:label for="guam" class="indent" />
+		<t:checkbox t:id="palau" t:value="entity.palau"  class="element checkbox indent" /><t:label for="palau" class="indent" />
+		<t:checkbox t:id="rmi" t:value="entity.rmi"  class="element checkbox indent" /><t:label for="rmi" class="indent" />
+		<t:checkbox t:id="otherWesternNorthPacific" t:value="entity.otherWesternNorthPacific"  class="element checkbox indent" /><t:label for="otherWesternNorthPacific" class="indent" />
+		<t:checkbox t:id="southPacific" t:value="entity.southPacific"  class="element checkbox" /><t:label for="southPacific" class="choice" />
+		<t:checkbox t:id="americanSamoa" t:value="entity.americanSamoa"  class="element checkbox indent" /><t:label for="americanSamoa" class="indent" />
+		<t:checkbox t:id="australia" t:value="entity.australia"  class="element checkbox indent" /><t:label for="australia" class="indent" />
+		<t:checkbox t:id="cookIslands" t:value="entity.cookIslands"  class="element checkbox indent" /><t:label for="cookIslands" class="indent" />
+		<t:checkbox t:id="fiji" t:value="entity.fiji"  class="element checkbox indent" /><t:label for="fiji" class="indent" />
+		<t:checkbox t:id="frenchPolynesia" t:value="entity.frenchPolynesia"  class="element checkbox indent" /><t:label for="frenchPolynesia" class="indent" />
+		<t:checkbox t:id="kiribati" t:value="entity.kiribati"  class="element checkbox indent" /><t:label for="kiribati" class="indent" />
+		<t:checkbox t:id="newZealand" t:value="entity.newZealand"  class="element checkbox indent" /><t:label for="newZealand" class="indent" />
+		<t:checkbox t:id="png" t:value="entity.png"  class="element checkbox indent" /><t:label for="png" class="indent" />
+		<t:checkbox t:id="samoa" t:value="entity.samoa"  class="element checkbox indent" /><t:label for="samoa" class="indent" />
+		<t:checkbox t:id="solomonIslands" t:value="entity.solomonIslands"  class="element checkbox indent" /><t:label for="solomonIslands" class="indent" />
+		<t:checkbox t:id="tonga" t:value="entity.tonga"  class="element checkbox indent" /><t:label for="tonga" class="indent" />
+		<t:checkbox t:id="tuvalu" t:value="entity.tuvalu"  class="element checkbox indent" /><t:label for="tuvalu" class="indent" />
+		<t:checkbox t:id="vanuatu" t:value="entity.vanuatu"  class="element checkbox indent" /><t:label for="vanuatu" class="indent" />
+		<t:checkbox t:id="otherSouthPacific" t:value="entity.otherSouthPacific"  class="element checkbox indent" /><t:label for="otherSouthPacific" class="indent" />
+		<t:checkbox t:id="pacificBasin" t:value="entity.pacificBasin"  class="element checkbox" /><t:label for="pacificBasin" class="choice" />
+		<t:checkbox t:id="global" t:value="entity.global"  class="element checkbox" /><t:label for="global" class="choice" />
+	
+	  </div>
+	 </fieldset>
+	</li>	
+
+     <li>     
+     <fieldset>
+
+      <legend class="description" onclick="javascript:hideToggle('ecvBox');" title="Show or Hide">Essential Climate Variable</legend>
+       <div id="ecvBox" class="unhidden">
+	
+        <t:checkbox t:id="atmosphericData" t:value="entity.atmosphericData"  class="element checkbox" /><t:label for="atmosphericData" class="choice" />
+        <t:checkbox t:id="oceanicData" t:value="entity.oceanicData"  class="element checkbox" /><t:label for="oceanicData" class="choice" />
+        <t:checkbox t:id="terrestrialData" t:value="entity.terrestrialData"  class="element checkbox" /><t:label for="terrestrialData" class="choice" />
+	
+	  </div>
+	 </fieldset>
+	</li>	
+	
+     <li>     
+     <fieldset>
+
+      <legend class="description" onclick="javascript:hideToggle('impBox');" title="Show or Hide">Phenomena/Impacts</legend>
+       <div id="impBox" class="unhidden">
+	
+		<t:checkbox t:id="drought" t:value="entity.drought"  class="element checkbox" /><t:label for="drought" class="choice" />
+		<t:checkbox t:id="rainfall" t:value="entity.rainfall"  class="element checkbox" /><t:label for="rainfall" class="choice" />
+		<t:checkbox t:id="flooding" t:value="entity.flooding"  class="element checkbox" /><t:label for="flooding" class="choice" />
+		<t:checkbox t:id="bleaching" t:value="entity.bleaching"  class="element checkbox" /><t:label for="bleaching" class="choice" />
+		<t:checkbox t:id="otherPhenomena" t:value="entity.otherPhenomena"  class="element checkbox" /><t:label for="otherPhenomena" class="choice" />
+	
+	  </div>
+	 </fieldset>
+	</li>	
+	
+     <li>     
+     <fieldset>
+
+      <legend class="description" onclick="javascript:hideToggle('scaleBox');" title="Show or Hide">Spatial Scale</legend>
+       <div id="scaleBox" class="unhidden">
+	
+		<t:checkbox t:id="grid" t:value="entity.grid"  class="element checkbox" /><t:label for="grid" class="choice" />
+		<t:checkbox t:id="point" t:value="entity.point"  class="element checkbox" /><t:label for="point" class="choice" />
+	
+	  </div>
+	 </fieldset>
+	</li>	
+	
+     <li>     
+     <fieldset>
+
+      <legend class="description" onclick="javascript:hideToggle('timeBox');" title="Show or Hide">Time Scale</legend>
+       <div id="timeBox" class="unhidden">
+	
+		<t:checkbox t:id="past" t:value="entity.past"  class="element checkbox" /><t:label for="past" class="choice" />
+		<t:checkbox t:id="current" t:value="entity.current"  class="element checkbox" /><t:label for="current" class="choice" />
+		<t:checkbox t:id="future" t:value="entity.future"  class="element checkbox" /><t:label for="future" class="choice" />
+		<t:checkbox t:id="oneMonth" t:value="entity.oneMonth"  class="element checkbox indent" /><t:label for="oneMonth" class="indent" />
+		<t:checkbox t:id="threeMonths" t:value="entity.threeMonths"  class="element checkbox indent" /><t:label for="threeMonths" class="indent" />
+		<t:checkbox t:id="sixMonths" t:value="entity.sixMonths"  class="element checkbox indent" /><t:label for="sixMonths" class="indent" />
+	
+	  </div>
+	 </fieldset>
+	</li>	
+
+     <li>     
+     <fieldset>
+
+      <legend class="description" onclick="javascript:hideToggle('methodBox');" title="Show or Hide">Methodology</legend>
+       <div id="methodBox" class="unhidden">
+	
+		<t:checkbox t:id="insitu" t:value="entity.insitu"  class="element checkbox" /><t:label for="insitu" class="choice" />
+		<t:checkbox t:id="remote" t:value="entity.remote"  class="element checkbox" /><t:label for="remote" class="choice" />
+		<t:checkbox t:id="statistical" t:value="entity.statistical"  class="element checkbox" /><t:label for="statistical" class="choice" />
+		<t:checkbox t:id="dynamical" t:value="entity.dynamical"  class="element checkbox" /><t:label for="dynamical" class="choice" />
+	
+	  </div>
+	 </fieldset>
+	</li>	
+
+
+	<li>     
+     <fieldset>
+
+      <legend class="description" onclick="javascript:hideToggle('sectorBox');" title="Show or Hide">Sector</legend>
+       <div id="sectorBox" class="unhidden">
+
+		<t:checkbox t:id="health" t:value="entity.health"  class="element checkbox" /><t:label for="health" class="choice" />
+		<t:checkbox t:id="freshWater" t:value="entity.freshWater"  class="element checkbox" /><t:label for="freshWater" class="choice" />
+		<t:checkbox t:id="energy" t:value="entity.energy"  class="element checkbox" /><t:label for="energy" class="choice" />
+		<t:checkbox t:id="transportation" t:value="entity.transportation"  class="element checkbox" /><t:label for="transportation" class="choice" />
+		<t:checkbox t:id="planning" t:value="entity.planning"  class="element checkbox" /><t:label for="planning" class="choice" />
+		<t:checkbox t:id="socioCultural" t:value="entity.socioCultural"  class="element checkbox" /><t:label for="socioCultural" class="choice" />
+		<t:checkbox t:id="agriculture" t:value="entity.agriculture"  class="element checkbox" /><t:label for="agriculture" class="choice" />
+		<t:checkbox t:id="recreation" t:value="entity.recreation"  class="element checkbox" /><t:label for="recreation" class="choice" />
+		<t:checkbox t:id="ecological" t:value="entity.ecological"  class="element checkbox" /><t:label for="ecological" class="choice" />
+		<t:checkbox t:id="otherSector" t:value="entity.otherSector"  class="element checkbox" /><t:label for="otherSector" class="choice" />
+		
+
+
+       </div>
+       
+      </fieldset>
+     </li>
+	
+	
+	
+		<li id="li_description">
+		<t:label class="description" for="description" />
+		<t:textArea t:id="description" t:validate="maxlength=4096" rows="5" cols="90" value="entity.description" />
+		</li>
+		<li id="li_url">
+		<t:label class="description" for="url" />
+		<t:textArea t:id="url" t:validate="maxlength=255" rows="1" cols="90" value="entity.url" />
+		</li>
+		<li id="li_organization">
+		<t:label class="description" for="organization" />
+		<t:textArea t:id="organization" t:validate="maxlength=2048" rows="2" cols="90" value="entity.organization" />
+		</li>
+        <li id="li_contact">
+         <t:label class="description" for="contact" />
+         <t:textArea t:id="contact" t:validate="maxlength=2048" rows="3" cols="90" value="entity.contact" />
+        </li>
+		<li id="li_keywords">
+		<t:label class="description" for="keywords" />
+		<t:textArea t:id="keywords" t:validate="maxlength=4096" rows="5" cols="90" value="entity.keywords" />
+		</li>
+		<li id="li_worksheet">
+		<t:label class="description" for="worksheet" />
+		<t:textArea t:id="worksheet" t:validate="maxlength=255" rows="1" cols="90" value="entity.worksheet" />
+		</li>
+
+
+   </ul>
+  </t:form>	
+    
+ </body>
+</html>

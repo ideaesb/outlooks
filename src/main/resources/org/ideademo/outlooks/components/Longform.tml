@@ -1,0 +1,32 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+
+ <head>
+  <title>Piko Admin: Long Form</title>
+  <script src="${context:js/jquery-1.7.2.min.js}" type="text/javascript"></script>
+  <script src="${context:js/addCheckBoxLabelToKeywords.js}" type="text/javascript"></script>
+  <script src="${context:js/showHide.js}" type="text/javascript"></script>
+ </head>
+ 
+ 
+  <body>
+   
+  <img id="bottom" src="${context:layout/images/top.png}" alt="" />
+     <div id="form_container">
+       <img id="logo" src="${context:layout/images/head_title.png}" alt="" style="margin-left: 15px" />
+     
+    
+         <t:body/>
+
+
+
+	   <div id="footer">
+		    Developed by NOAA NCDC Climate Services in the Pacific Region.   
+	   </div>
+  </div>
+
+
+  <img id="bottom" src="${context:layout/images/bottom.png}" alt="" />
+ 
+ 
+ </body>
+</html>
