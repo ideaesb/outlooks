@@ -104,9 +104,9 @@
       <td>ECV</td>
       <td>
        <ul style="display: inline;margin-left: 0;padding-left: 0;">
-        <t:if test="${row.atmosphericData}"><li style="margin-left: 10px;">${message:ATM}</li></t:if> 
-        <t:if test="${row.oceanicData}"><li style="margin-left: 10px;">${message:OCE}</li></t:if> 
-        <t:if test="${row.terrestrialData}"><li style="margin-left: 10px;">${message:TER}</li></t:if> 
+        <t:if test="${row.atmosphericData}"><li style="margin-left: 13px;">${message:ATM}</li></t:if> 
+        <t:if test="${row.oceanicData}"><li style="margin-left: 13px;">${message:OCE}</li></t:if> 
+        <t:if test="${row.terrestrialData}"><li style="margin-left: 13px;">${message:TER}</li></t:if> 
         </ul>
        </td>
      </tr>
@@ -115,24 +115,24 @@
       <td>Region</td>
       <td>
        <ul style="display: inline;margin-left: 0;padding-left: 0;">
-        <t:if test="${row.centralNorthPacific}"><li style="margin-left: 10px;">${message:CNP-short}</li></t:if> 
-        <t:if test="${row.westernNorthPacific}"><li style="margin-left: 10px;">${message:WNP-short}</li></t:if> 
-        <t:if test="${row.southPacific}"><li style="margin-left: 10px;">${message:SP-short}</li></t:if> 
-        <t:if test="${row.pacificBasin}"><li style="margin-left: 10px;">${message:BAS}</li></t:if> 
-        <t:if test="${row.global}"><li style="margin-left: 10px;">${message:GLB}</li></t:if> 
+        <t:if test="${row.centralNorthPacific}"><li style="margin-left: 13px;">${message:CNP-short}</li></t:if> 
+        <t:if test="${row.westernNorthPacific}"><li style="margin-left: 13px;">${message:WNP-short}</li></t:if> 
+        <t:if test="${row.southPacific}"><li style="margin-left: 13px;">${message:SP-short}</li></t:if> 
+        <t:if test="${row.pacificBasin}"><li style="margin-left: 13px;">${message:BAS}</li></t:if> 
+        <t:if test="${row.global}"><li style="margin-left: 13px;">${message:GLB}</li></t:if> 
         </ul>
        </td>
      </tr>
      
      <tr>
-      <td>Phenomena/Impact</td>
+      <td>Impact</td>
       <td>
        <ul style="display: inline;margin-left: 0;padding-left: 0;">
-        <t:if test="${row.drought}"><li style="margin-left: 10px;">${message:DROUGHT}</li></t:if> 
-        <t:if test="${row.rainfall}"><li style="margin-left: 10px;">${message:RAIN}</li></t:if> 
-        <t:if test="${row.flooding}"><li style="margin-left: 10px;">${message:FLOOD}</li></t:if> 
-        <t:if test="${row.bleaching}"><li style="margin-left: 10px;">${message:BLEACH}</li></t:if> 
-        <t:if test="${row.otherPhenomena}"><li style="margin-left: 10px;">${message:OTHERP}</li></t:if> 
+        <t:if test="${row.drought}"><li style="margin-left: 13px;">${message:DROUGHT}</li></t:if> 
+        <t:if test="${row.rainfall}"><li style="margin-left: 13px;">${message:RAIN}</li></t:if> 
+        <t:if test="${row.flooding}"><li style="margin-left: 13px;">${message:FLOOD}</li></t:if> 
+        <t:if test="${row.bleaching}"><li style="margin-left: 13px;">${message:BLEACH}</li></t:if> 
+        <t:if test="${row.otherPhenomena}"><li style="margin-left: 13px;">${message:OTHERP}</li></t:if> 
         </ul>
        </td>
      </tr>
@@ -142,16 +142,16 @@
       <td>Sector</td>
       <td>
        <ul style="display: inline;margin-left: 0;padding-left: 0;">
-        <t:if test="${row.health}"><li style="margin-left: 10px;">${message:PHS}</li></t:if> 
-        <t:if test="${row.freshWater}"><li style="margin-left: 10px;">${message:FWR}</li></t:if> 
-        <t:if test="${row.energy}"><li style="margin-left: 10px;">${message:ENE}</li></t:if> 
-        <t:if test="${row.transportation}"><li style="margin-left: 10px;">${message:TCC}</li></t:if> 
-        <t:if test="${row.planning}"><li style="margin-left: 10px;">${message:CPD}</li></t:if> 
-        <t:if test="${row.socioCultural}"><li style="margin-left: 10px;">${message:SCR}</li></t:if> 
-        <t:if test="${row.agriculture}"><li style="margin-left: 10px;">${message:AAF}</li></t:if> 
-        <t:if test="${row.recreation}"><li style="margin-left: 10px;">${message:RAT}</li></t:if> 
-        <t:if test="${row.ecological}"><li style="margin-left: 10px;">${message:ECO}</li></t:if> 
-        <t:if test="${row.otherSector}"><li style="margin-left: 10px;">${message:OTS}</li></t:if> 
+        <t:if test="${row.health}"><li style="margin-left: 13px;">${message:PHS}</li></t:if> 
+        <t:if test="${row.freshWater}"><li style="margin-left: 13px;">${message:FWR}</li></t:if> 
+        <t:if test="${row.energy}"><li style="margin-left: 13px;">${message:ENE}</li></t:if> 
+        <t:if test="${row.transportation}"><li style="margin-left: 13px;">${message:TCC}</li></t:if> 
+        <t:if test="${row.planning}"><li style="margin-left: 13px;">${message:CPD}</li></t:if> 
+        <t:if test="${row.socioCultural}"><li style="margin-left: 13px;">${message:SCR}</li></t:if> 
+        <t:if test="${row.agriculture}"><li style="margin-left: 13px;">${message:AAF}</li></t:if> 
+        <t:if test="${row.recreation}"><li style="margin-left: 13px;">${message:RAT}</li></t:if> 
+        <t:if test="${row.ecological}"><li style="margin-left: 13px;">${message:ECO}</li></t:if> 
+        <t:if test="${row.otherSector}"><li style="margin-left: 13px;">${message:OTS}</li></t:if> 
        </ul>
        </td>
      </tr>
@@ -160,10 +160,10 @@
       <td>Methodology</td>
       <td>
        <ul style="display: inline;margin-left: 0;padding-left: 0;">
-        <t:if test="${row.insitu}"><li style="margin-left: 10px;">${message:INSITU}</li></t:if> 
-        <t:if test="${row.remote}"><li style="margin-left: 10px;">${message:REMOTE}</li></t:if> 
-        <t:if test="${row.statistical}"><li style="margin-left: 10px;">${message:STATIC}</li></t:if> 
-        <t:if test="${row.dynamical}"><li style="margin-left: 10px;">${message:DYNAMIC}</li></t:if> 
+        <t:if test="${row.insitu}"><li style="margin-left: 13px;">${message:INSITU}</li></t:if> 
+        <t:if test="${row.remote}"><li style="margin-left: 13px;">${message:REMOTE}</li></t:if> 
+        <t:if test="${row.statistical}"><li style="margin-left: 13px;">${message:STATIC}</li></t:if> 
+        <t:if test="${row.dynamical}"><li style="margin-left: 13px;">${message:DYNAMIC}</li></t:if> 
        </ul>
        </td>
      </tr>
@@ -172,9 +172,19 @@
       <td>Time Scale</td>
       <td>
        <ul style="display: inline;margin-left: 0;padding-left: 0;">
-        <t:if test="${row.past}"><li style="margin-left: 10px;">${message:PAST}</li></t:if> 
-        <t:if test="${row.current}"><li style="margin-left: 10px;">${message:CURRENT}</li></t:if> 
-        <t:if test="${row.future}"><li style="margin-left: 10px;">${message:FUTURE}</li></t:if> 
+        <t:if test="${row.past}"><li style="margin-left: 13px;">${message:PAST}</li></t:if> 
+        <t:if test="${row.current}"><li style="margin-left: 13px;">${message:CURRENT}</li></t:if> 
+        <t:if test="${row.future}"><li style="margin-left: 13px;">${message:FUTURE}</li></t:if> 
+       </ul>
+       </td>
+     </tr>
+
+     <tr>
+      <td>Spatial Scale</td>
+      <td>
+       <ul style="display: inline;margin-left: 0;padding-left: 0;">
+        <t:if test="${row.grid}"><li style="margin-left: 13px;">${message:GRID}</li></t:if> 
+        <t:if test="${row.point}"><li style="margin-left: 13px;">${message:POINT}</li></t:if> 
        </ul>
        </td>
      </tr>
