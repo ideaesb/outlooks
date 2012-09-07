@@ -174,7 +174,10 @@
        <ul style="display: inline;margin-left: 0;padding-left: 0;">
         <t:if test="${row.past}"><li style="margin-left: 13px;">${message:PAST}</li></t:if> 
         <t:if test="${row.current}"><li style="margin-left: 13px;">${message:CURRENT}</li></t:if> 
-        <t:if test="${row.future}"><li style="margin-left: 13px;">${message:FUTURE}</li></t:if> 
+        <!--  t:if test="${row.future}"><li style="margin-left: 13px;">${message:FUTURE}</li></t:if -->
+        <t:if test="${row.oneMonth}"><li style="margin-left: 13px;">${message:FUTURE1}</li></t:if> 
+        <t:if test="${row.threeMonths}"><li style="margin-left: 13px;">${message:FUTURE3}</li></t:if> 
+        <t:if test="${row.sixMonths}"><li style="margin-left: 13px;">${message:FUTURE6}</li></t:if> 
        </ul>
        </td>
      </tr>

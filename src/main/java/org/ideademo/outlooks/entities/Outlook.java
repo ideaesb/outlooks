@@ -1,5 +1,7 @@
 package org.ideademo.outlooks.entities;
 
+import java.lang.Comparable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +14,7 @@ import org.hibernate.search.annotations.Indexed;
 import org.apache.tapestry5.beaneditor.NonVisual;
 
 @Entity @Indexed
-public class Outlook 
+public class Outlook implements Comparable<Outlook>
 {
 	
 	//////////////////////////////////////////
@@ -811,5 +813,23 @@ public class Outlook
 	public void setWorksheetExists(boolean worksheetExists) {
 		this.worksheetExists = worksheetExists;
 	}
+
+	
+	////////////////////////////////////////////////
+	/// default/natural sort order - String  - names
+	
+	public int compareTo(Outlook ao) 
+	{
+	    boolean thisIsEmpty = false;
+	    boolean aoIsEmpty = false; 
+	    
+	    if (this.getName() == null || this.getName().trim().length() == 0) thisIsEmpty = true; 
+	    if (ao.getName() == null || ao.getName().trim().length() == 0) aoIsEmpty = true;
+	    
+	    if (thisIsEmpty && aoIsEmpty) return 0;
+	    if (thisIsEmpty && !aoIsEmpty) return -1;
+	    if (!thisIsEmpty && aoIsEmpty) return 1; 
+	    return this.getName().compareToIgnoreCase(ao.getName());
+    }
 
 }

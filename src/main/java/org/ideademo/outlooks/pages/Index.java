@@ -1,5 +1,6 @@
 package org.ideademo.outlooks.pages;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
@@ -122,7 +123,7 @@ public class Index
   
   public enum Timescale
   {
-	 PAST, CURRENT, FUTURE  
+	 PAST, CURRENT, FUTURE1, FUTURE3, FUTURE6  
   }
 
   
@@ -154,8 +155,15 @@ public class Index
        xlst = session.createCriteria(Outlook.class).add(ex).list();
        
        
-       if (xlst != null) logger.info("Example Search Result List Size  = " + xlst.size() );
-       else logger.info("Example Search result Null");
+       if (xlst != null)
+       {
+    	   logger.info("Example Search Result List Size  = " + xlst.size() );
+    	   Collections.sort(xlst);
+       }
+       else
+       {
+         logger.info("Example Search result did not find any results...");
+       }
     }
     
     List<Outlook> tlst=null;
@@ -179,8 +187,15 @@ public class Index
 			    .createQuery();
       	  
        tlst = fullTextSession.createFullTextQuery(luceneQuery, Outlook.class).list();
-       if (tlst != null) logger.info("TEXT Search Result List Size  = " + tlst.size() );
-       else logger.info("TEXTSearch result was Null");
+       if (tlst != null) 
+       {
+    	   logger.info("TEXT Search for " + searchText + " found " + tlst.size() + " Outlooks records in database");
+    	   Collections.sort(tlst);
+       }
+       else
+       {
+          logger.info("TEXT Search for " + searchText + " found nothing in Outlooks");
+       }
     }
     
     
@@ -189,14 +204,21 @@ public class Index
     {
     	// Everything...
     	List <Outlook> alst = session.createCriteria(Outlook.class).list();
-    	if (alst != null && alst.size() > 0)	logger.info ("Returing all " + alst.size() + " records");
-    	else logger.info("No records found in the database");
+    	if (alst != null && alst.size() > 0)
+    	{
+    		logger.info ("Returing all " + alst.size() + " OUTLOOK records");
+        	Collections.sort(alst);
+    	}
+    	else
+    	{
+    		logger.warn("No OUTLOOK records found in the database");
+    	}
         return alst;
     }
     else if (xlst == null && tlst != null)
     {
     	// just text search results
-    	logger.info("Returing " + tlst.size() + " records from PURE text search");
+    	logger.info("Returing " + tlst.size() + " records from PURE text search for " + searchText);
     	return tlst;
     }
     else if (xlst != null && tlst == null)
@@ -239,7 +261,7 @@ public class Index
     		}
     			
     	}
-    	
+    	if (ivec.size() > 0)  Collections.sort(ivec);
     	return ivec;
     }
     
@@ -565,7 +587,20 @@ public class Index
       }
       else if (choice.equalsIgnoreCase("FUTURE"))
       {
+    	// this will never work as of Sep 6 2012 since the choice was removed choice box and hence from QBE search 
     	example.setFuture(true);  
+      }
+      else if (choice.equalsIgnoreCase("FUTURE1"))
+      {
+    	example.setOneMonth(true);  
+      }
+      else if (choice.equalsIgnoreCase("FUTURE3"))
+      {
+    	example.setThreeMonths(true);
+      }
+      else if (choice.equalsIgnoreCase("FUTURE6"))
+      {
+    	example.setSixMonths(true);  
       }
       else
       {
@@ -645,5 +680,8 @@ public class Index
 	 outlook.setPast(false);
 	 outlook.setCurrent(false);
 	 outlook.setFuture(false);
+	 outlook.setOneMonth(false);
+	 outlook.setThreeMonths(false);
+	 outlook.setSixMonths(false);
   }
 }
