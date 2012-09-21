@@ -94,6 +94,12 @@ public class Example implements Criterion {
 	      {
 	        return ((Boolean) object).booleanValue();
 	      }
+	      else if (object instanceof String)
+	      {
+	    	String coerce = (String) object;
+	    	if (coerce.trim().length() == 0) return false;
+	    	else return true;
+	      }
 	      else
 	      {
 	        return true;

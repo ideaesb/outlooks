@@ -208,6 +208,8 @@
    </div><!-- End of Accordion 1 -->
   </div><!-- End of "container 2" -->
  </div><!-- End of "container 3" -->
+<div style="float:right;width:280px;word-spacing:6px;font-size:80%;padding-right:10px;padding-top:2px;color:#888888;white-space:nowrap;text-align:right;">
+  ${retrieved} of ${total} records</div>
 
   
     

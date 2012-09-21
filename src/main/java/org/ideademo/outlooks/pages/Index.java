@@ -3,10 +3,12 @@ package org.ideademo.outlooks.pages;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.StringTokenizer;
 import java.util.Vector;
 
 import org.apache.tapestry5.PersistenceConstants;
 
+import org.apache.tapestry5.annotations.PageActivationContext;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.Persist;
 
@@ -23,8 +25,10 @@ import org.hibernate.criterion.MatchMode;
 
 import org.hibernate.search.FullTextSession;
 import org.hibernate.search.Search;
-import org.hibernate.search.query.dsl.QueryBuilder;
 
+import org.hibernate.search.query.dsl.BooleanJunction;
+import org.hibernate.search.query.dsl.QueryBuilder;
+import org.hibernate.search.query.dsl.TermMatchingContext;
 import org.ideademo.outlooks.entities.Outlook;
 
 import org.apache.log4j.Logger;
@@ -59,6 +63,13 @@ public class Index
   @Inject
   private HibernateSessionManager sessionManager;
 
+  @Property 
+  @Persist (PersistenceConstants.FLASH)
+  int retrieved; 
+  @Property 
+  @Persist (PersistenceConstants.FLASH)
+  int total;
+  
   
   ///////////////////////////////////////////////////////////////////////////////////////////////////////
   //  Select Boxes - Enumaration values - the user-visible labels are externalized in Index.properties 
@@ -146,8 +157,13 @@ public class Index
 	if (methodology != null) onValueChangedFromMethodology(methodology.toString());
 	if (timescale != null) onValueChangedFromTimescale(timescale.toString());
 	
-	// then makes lists and sublists as per the search criteria 
-	List<Outlook> xlst=null;
+    // Get all records anyway - for showing total at bottom of presentation layer
+    List <Outlook> alst = session.createCriteria(Outlook.class).list();
+    total = alst.size();
+
+	
+    // then makes lists and sublists as per the search criteria 
+    List<Outlook> xlst=null; // xlst = Query by Example search List
     if(example != null)
     {
        Example ex = Example.create(example).excludeFalse().ignoreCase().enableLike(MatchMode.ANYWHERE);
@@ -157,12 +173,12 @@ public class Index
        
        if (xlst != null)
        {
-    	   logger.info("Example Search Result List Size  = " + xlst.size() );
+    	   logger.info("Outlook Example Search Result List Size  = " + xlst.size() );
     	   Collections.sort(xlst);
        }
        else
        {
-         logger.info("Example Search result did not find any results...");
+         logger.info("Outlook Example Search result did not find any results...");
        }
     }
     
@@ -180,12 +196,21 @@ public class Index
        }
       
        QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity( Outlook.class ).get();
-       org.apache.lucene.search.Query luceneQuery = qb
-			    .keyword()
-			    .onFields("code","name","description", "keywords","contact")
-			    .matching(searchText)
-			    .createQuery();
-      	  
+       
+       // fields being covered by text search 
+       TermMatchingContext onFields = qb
+		        .keyword()
+		        .onFields("code","name","description", "keywords","contact", "organization", "url", "worksheet");
+       
+       BooleanJunction<BooleanJunction> bool = qb.bool();
+       /////// Tokenize the search string for default AND logic ///
+       StringTokenizer st = new StringTokenizer(searchText);
+       while (st.hasMoreElements()) {
+    	   bool.must(onFields.matching(st.nextElement()).createQuery());
+       }
+       
+       org.apache.lucene.search.Query luceneQuery = bool.createQuery();
+       
        tlst = fullTextSession.createFullTextQuery(luceneQuery, Outlook.class).list();
        if (tlst != null) 
        {
@@ -203,51 +228,75 @@ public class Index
     if (example == null && (searchText == null || searchText.trim().length() == 0))
     {
     	// Everything...
-    	List <Outlook> alst = session.createCriteria(Outlook.class).list();
     	if (alst != null && alst.size() > 0)
     	{
-    		logger.info ("Returing all " + alst.size() + " OUTLOOK records");
-        	Collections.sort(alst);
+    	  logger.info ("Returing all " + alst.size() + " Outlooks records");
+          Collections.sort(alst);
     	}
     	else
     	{
-    		logger.warn("No OUTLOOK records found in the database");
+    	  logger.warn("No Outlook records found in the database");
     	}
-        return alst;
+    	retrieved = total;
+        return alst; 
     }
     else if (xlst == null && tlst != null)
     {
     	// just text search results
-    	logger.info("Returing " + tlst.size() + " records from PURE text search for " + searchText);
+    	logger.info("Returing " + tlst.size() + " Outlooks records as a result of PURE text search (no QBE) for " + searchText);
+    	retrieved = tlst.size();
     	return tlst;
     }
     else if (xlst != null && tlst == null)
     {
     	// just example query results
-    	logger.info("Returning " + xlst.size() + " records from PURE Query-By-Example (QBE)");
+    	logger.info("Returning " + xlst.size() + " Outlooks records as a result of PURE Query-By-Example (QBE), no text string");
+    	retrieved = xlst.size();
     	return xlst;
     }
     else 
     {
-    	// get the intersection of the two lists
+
+        ////////////////////////////////////////////
+    	// get the INTERSECTION of the two lists
     	
+    	// TRIVIAL: if one of them is empty, return the other
     	// if one of them is empty, return the other
-    	if (xlst.size() == 0 && tlst.size() > 0) return tlst;
-    	if (tlst.size() == 0 && xlst.size() > 0) return xlst;
+    	if (xlst.size() == 0 && tlst.size() > 0)
+    	{
+          logger.info("Returing " + tlst.size() + " Outlooks records as a result of ONLY text search, QBE pulled up ZERO records for " + searchText);
+          retrieved = tlst.size();
+          return tlst;
+    	}
+
+    	if (tlst.size() == 0 && xlst.size() > 0)
+    	{
+          logger.info("Returning " + xlst.size() + " Outlooks records as a result of ONLY Query-By-Example (QBE), text search pulled up NOTHING for string " + searchText);
+          retrieved = xlst.size();
+          return xlst;
+    	}
     	
     	
     	List <Outlook> ivec = new Vector<Outlook>();
-    	// if both are empty, return this vector. 
-    	if (xlst.size() == 0 && tlst.size() == 0) return ivec; 
+    	// if both are empty, return this Empty vector. 
+    	if (xlst.size() == 0 && tlst.size() == 0)
+    	{
+          logger.info("Neither QBE nor text search for string " + searchText +  " pulled up ANY Outlooks Records.");
+          retrieved = 0;
+          return ivec;
+    	}
     	
-    	// now deal with BOTH text and QBE being non-empty lists - by Id
+
+
+    	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    	// now deal with BOTH text and QBE being non-empty lists - implementing intersection by Database Primary Key -  Id
     	Iterator<Outlook> xiterator = xlst.iterator();
     	while (xiterator.hasNext()) 
     	{
-    		Outlook x = xiterator.next();
-    		Long xid = x.getId();
+          Outlook x = xiterator.next();
+          Long xid = x.getId();
     		
-        	Iterator<Outlook> titerator = tlst.iterator();
+          Iterator<Outlook> titerator = tlst.iterator();
     		while(titerator.hasNext())
     		{
         		Outlook t = titerator.next();
@@ -261,7 +310,12 @@ public class Index
     		}
     			
     	}
+    	
+
+        // sort again - 
     	if (ivec.size() > 0)  Collections.sort(ivec);
+    	logger.info("Returning " + ivec.size() + " Outlooks records from COMBINED (text, QBE) Search");
+    	retrieved = ivec.size();
     	return ivec;
     }
     
