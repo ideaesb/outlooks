@@ -7,7 +7,7 @@
      <li id="nav-1"><a href="../index.php"><span>HOME </span></a></li>
      <li id="nav-1"><a href="javascript:alert('Under Construction');"><span>Scenarios</span></a></li>
      <li id="nav-1"><t:pagelink page="prop:componentResources.pageName">Outlooks</t:pagelink></li>
-     <li id="nav-1"><a href="javascript:alert('Under Construction');"><span>Climatology</span></a></li>
+     <li id="nav-1"><a href="../climatologies"><span>Climatologies</span></a></li>
     </ul>
     
 
