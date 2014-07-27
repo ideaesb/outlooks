@@ -30,7 +30,14 @@
          <artifactId>hibernate-search</artifactId>
          <version>3.4.2.Final</version>
        </dependency>
-       
+			<!--  streamed pdf generation -->
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itextpdf</artifactId>
+			<version>5.4.4</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>       
        
         <!-- This adds automatic compression of JavaScript and CSS when in production mode. -->
         <!-- 
