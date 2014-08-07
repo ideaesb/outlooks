@@ -58,8 +58,11 @@
 		        <td  align="right" width="150">Text Search</td>
 		        <td align="left">
                    <input t:type="TextField" t:id="searchText" size="50" value="searchText" />
-                   <t:submit t:id="search" value="Go" /><t:submit t:id="clear" value="Clear/Show All" /><t:submit t:id="pdf" name="PDF" value="PDF" />
-                 </td>
+                   <t:submit t:id="search" value="Go" />
+                   <t:submit t:id="clear" value="Clear/Show All" />
+                   <t:submit t:id="pdf" name="PDF" value="PDF" hidden="hidden" />
+                   <t:pagelink page="pdf/Index" target="_blank">PDF</t:pagelink>               
+                </td>
 		      </tr>
 		    </table>
           </form>  

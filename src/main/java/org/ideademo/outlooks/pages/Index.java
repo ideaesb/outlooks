@@ -13,7 +13,7 @@ import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.util.Version;
 import org.apache.tapestry5.PersistenceConstants;
-import org.apache.tapestry5.annotations.PageActivationContext;
+import org.apache.tapestry5.annotations.AfterRender;
 import org.apache.tapestry5.annotations.Path;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.Persist;
@@ -82,7 +82,7 @@ public class Index
 
     
   @Property
-  @Persist (PersistenceConstants.FLASH)
+  @Persist 
   private String searchText;
 
   @Inject
@@ -92,10 +92,10 @@ public class Index
   private HibernateSessionManager sessionManager;
 
   @Property 
-  @Persist (PersistenceConstants.FLASH)
+  @Persist 
   int retrieved; 
   @Property 
-  @Persist (PersistenceConstants.FLASH)
+  @Persist 
   int total;
 
   @Inject
@@ -115,7 +115,7 @@ public class Index
   
   // the regions select box
   @Property
-  @Persist (PersistenceConstants.FLASH)
+  @Persist 
   private Regions regions;
   
   public enum Regions
@@ -126,7 +126,7 @@ public class Index
   
   // the ECV select box
   @Property
-  @Persist (PersistenceConstants.FLASH)
+  @Persist 
   private Ecv ecv;
   
   public enum Ecv
@@ -137,7 +137,7 @@ public class Index
   
   // the ECV select box
   @Property
-  @Persist (PersistenceConstants.FLASH)
+  @Persist
   private Phenomena phenomena;
   
   public enum Phenomena
@@ -147,7 +147,7 @@ public class Index
   
   // the sector select box
   @Property
-  @Persist (PersistenceConstants.FLASH)
+  @Persist 
   private Sector sector;
   
   public enum Sector
@@ -157,7 +157,7 @@ public class Index
   
   // the METHOLOGY select box
   @Property
-  @Persist (PersistenceConstants.FLASH)
+  @Persist
   private Method methodology;
   
   public enum Method
@@ -167,7 +167,7 @@ public class Index
 
   // the TIMESCALE select box
   @Property
-  @Persist (PersistenceConstants.FLASH)
+  @Persist 
   private Timescale timescale;
   
   public enum Timescale
@@ -175,8 +175,6 @@ public class Index
 	 PAST, CURRENT, FUTURE1, FUTURE3, FUTURE6  
   }
 
-  
-  
   
   ////////////////////////////////////////////////////////////////////////////////////////////////////////
   //  Entity List generator - QBE, Text Search or Show All 
@@ -387,6 +385,7 @@ public class Index
 
   Object onSelectedFromClear() 
   {
+	logger.info("C L E A R   E V E R Y T H I N G !!!!!!!!!!!!!!!!!!!");
     this.searchText = "";
    
     // nullify selectors 
@@ -721,11 +720,15 @@ public class Index
   
   public StreamResponse onSelectedFromPdf() 
   {
+     List<Outlook> list = getList();
      String subheader = "Printing " + retrieved + " of total " + total + " records.";
      if (StringUtils.isNotBlank(searchText))
      {
     	  subheader += "  Searching for \"" + searchText + "\""; 
      }
+     
+     logger.info("Entered onSelectedFromPdf subheader = " + subheader);
+     
      Document document = new Document();
      ByteArrayOutputStream baos = new ByteArrayOutputStream();
      try
@@ -736,7 +739,6 @@ public class Index
          document.add(new Paragraph(getHeader("PaCIS Outlooks ")));
          document.add(new Paragraph(subheader));
          document.add(Chunk.NEWLINE);document.add(Chunk.NEWLINE);
-         List<Outlook> list = getList();
          Iterator<Outlook> iterator = list.iterator();
          while (iterator.hasNext())
          {
